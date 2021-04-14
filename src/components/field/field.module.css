@@ -1,0 +1,41 @@
+.field {
+	border-collapse: collapse;
+	margin: auto;
+}
+
+.cell {
+	width: 24px;
+	height: 24px;
+	box-sizing: border-box;
+	border: 1px solid mediumseagreen;
+	background-color: lightgreen;
+}
+
+.snake:before,
+.snake:after {
+	content: '';
+	position: absolute;
+	width: 4px;
+	height: 4px;
+	border-radius: 50%;
+	background-color: sandybrown;
+}
+
+.snake:before {
+	top: 25%;
+	left: 25%;
+}
+
+.snake:after {
+	bottom: 25%;
+	right: 25%;
+}
+
+.snake {
+	position: relative;
+	background-color: firebrick;
+}
+
+.target {
+	background-color: dodgerblue;
+}
