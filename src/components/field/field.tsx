@@ -30,7 +30,7 @@ export function Field(props: FieldProps): JSX.Element {
 			}
 
 			if (!className) {
-				className = x === j && y === i ? 'target' : undefined;
+				className = x === j && y === i ? s.target : undefined;
 			}
 
 			cells.push(<td key={j} className={`${s.cell} ${className}`} />);

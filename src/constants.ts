@@ -5,7 +5,7 @@ export enum KeyCodes {
 	Left = 37,
 	Up,
 	Right,
-	Down,
+	Down
 }
 
 export const offset: Record<string, Point> = {
