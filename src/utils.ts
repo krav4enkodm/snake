@@ -53,15 +53,13 @@ export function createTarget(snake: Point[], size: number): Point {
 	return [getValue(collection, size), y];
 }
 
-// TODO: ramdomize it - should not take 1st possible value
-function getValue(collection: Set<number>, size: number): number {
-	for (let i = 0; i < size; i++) {
-		if (!collection.has(i)) {
-			return i;
-		}
-	}
+function getValue(collection: Set<number>, length: number): number {
+	const availableValues = Array
+		.from({ length }, (_, i: number) => i)
+		.filter((i: number) => !collection.has(i));
+	const index = Math.floor(Math.random() * availableValues.length);
 
-	throw new Error('No value');
+	return availableValues[index];
 }
 
 export function sortCounter(counter: Counter): [string, number][] {
