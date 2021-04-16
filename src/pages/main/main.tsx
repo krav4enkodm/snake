@@ -1,15 +1,13 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Field } from '../../components/field';
 import { Navigation } from '../../components/navigation';
-import { isItemInArray, getRandom, ensureDefined } from '../../utils';
+import { isItemInArray, createTarget, getStepInterval, ensureDefined } from '../../utils';
 import { Point } from '../../interfaces';
-
-import s from './main.module.css';
 import { useKeyboard } from '../../hooks';
 
-const size = 2;
+import s from './main.module.css';
 
-const cellsCount = size * size;
+const size = 4;
 
 const defaultSnake: Point[] = [[0, 0]];
 
@@ -46,7 +44,17 @@ export function Main(): JSX.Element {
 
 	useKeyboard({ navigation: step });
 
-	useEffect(() => { setTarget(createTarget(defaultSnake)); }, []);
+	useEffect(
+		() => {
+			setTarget(createTarget(defaultSnake, size));
+			return () => {
+				if (timer.current) {
+					clearInterval(timer.current);
+				}
+			}
+		},
+		[]
+	);
 
 	useEffect(
 		() => {
@@ -57,10 +65,10 @@ export function Main(): JSX.Element {
 				clearInterval(timer.current);
 			}
 	
-			timer.current = window.setInterval(
-				() => step(direction),
-				getStepInterval(snake.length)
-			);
+			// timer.current = window.setInterval(
+			// 	() => step(direction),
+			// 	getStepInterval(snake.length, size * size)
+			// );
 		},
 		[direction, snake]
 	);
@@ -91,7 +99,7 @@ export function Main(): JSX.Element {
 		nextSnake.push([nextHeadX, nextHeadY]);
 
 		if (hasTarget) {
-			setTarget(createTarget(nextSnake));
+			setTarget(createTarget(nextSnake, size));
 		} else {
 			nextSnake.shift();
 		}
@@ -103,25 +111,4 @@ export function Main(): JSX.Element {
 
 function isOutOfRange(coord: number, fieldSize: number): boolean {
 	return coord < 0 || coord >= fieldSize;
-}
-
-function createTarget(snake: Point[]): Point {
-	const x = getRandom(size);
-	const y = getRandom(size);
-
-	if (!isItemInArray(snake, [x, y])) {
-		return [x, y];
-	}
-
-	return createTarget(snake);
-}
-
-function getStepInterval(length: number): number {
-	const interval = 1000 - (length / cellsCount) * 1000;
-
-	if (interval < 500) {
-		return 500;
-	}
-
-	return interval;
 }
