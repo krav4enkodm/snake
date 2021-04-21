@@ -21,19 +21,6 @@
 				"args": "none"
 			}
 		],
-		"@typescript-eslint/no-unused-vars": [
-			"warn",
-			{
-				"vars": "all",
-				"args": "none"
-			}
-		],
-		"@typescript-eslint/no-explicit-any": [
-			"error",
-			{
-				"ignoreRestArgs": true
-			}
-		],
 		"max-len": [
 			"warn",
 			{
@@ -49,7 +36,31 @@
 				"allowForLoopAfterthoughts": true
 			}
 		],
-		"react/jsx-key": "error",
+		"indent": ["error", "tab"],
+		"@typescript-eslint/no-unused-vars": [
+			"warn",
+			{
+				"vars": "all",
+				"args": "none"
+			}
+		],
+		"@typescript-eslint/no-explicit-any": [
+			"error",
+			{
+				"ignoreRestArgs": true
+			}
+		],
+		"@typescript-eslint/comma-dangle": [
+			"error",
+			{
+				"arrays": "only-multiline",
+				"objects": "only-multiline",
+				"imports": "only-multiline",
+				"exports": "only-multiline",
+				"functions": "never"
+			}
+		],
+		"import/prefer-default-export": "off",
 		"import/no-extraneous-dependencies": [
 			"error",
 			{
@@ -63,35 +74,31 @@
 				]
 			}
 		],
-		"indent": ["error", "tab"],
-		"jsx-a11y/label-has-associated-control": [ "error", {
-			"required": {
-				"some": [ "nesting", "id"  ]
+		"jsx-a11y/label-has-associated-control": [
+			"error",
+			{
+				"required": {
+					"some": ["nesting", "id"]
+				}
 			}
-		}],
-		"jsx-a11y/label-has-for": [ "error", {
-			"required": {
-				"some": [ "nesting", "id"  ]
+		],
+		"jsx-a11y/label-has-for": [
+			"error",
+			{
+				"required": {
+					"some": ["nesting", "id"]
+				}
 			}
-		}],
+		],
+		"react/jsx-key": "error",
+		"react-hooks/exhaustive-deps": "off",
 		"react/jsx-props-no-spreading": "off",
 		"react/button-has-type": "off",
-		"import/prefer-default-export": "off",
 		"react/jsx-boolean-value": "off",
 		"react/prop-types": "off",
 		"react/no-unescaped-entities": "off",
 		"react/jsx-one-expression-per-line": "off",
 		"react/jsx-wrap-multilines": "off",
-		"react/destructuring-assignment": "off",
-		"@typescript-eslint/comma-dangle": [
-			"error",
-			{
-				"arrays": "only-multiline",
-				"objects": "only-multiline",
-				"imports": "only-multiline",
-				"exports": "only-multiline",
-				"functions": "never"
-			}
-		]
+		"react/destructuring-assignment": "off"
 	}
 }
