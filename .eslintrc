@@ -14,13 +14,6 @@
 	},
 	"rules": {
 		"object-curly-spacing": ["warn", "always"],
-		"no-unused-vars": [
-			"warn",
-			{
-				"vars": "all",
-				"args": "none"
-			}
-		],
 		"max-len": [
 			"warn",
 			{
@@ -38,7 +31,7 @@
 		],
 		"indent": ["error", "tab"],
 		"@typescript-eslint/no-unused-vars": [
-			"warn",
+			"error",
 			{
 				"vars": "all",
 				"args": "none"
@@ -57,7 +50,8 @@
 				"objects": "only-multiline",
 				"imports": "only-multiline",
 				"exports": "only-multiline",
-				"functions": "never"
+				"functions": "never",
+				"enums": "never"
 			}
 		],
 		"import/prefer-default-export": "off",
