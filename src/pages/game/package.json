@@ -1,0 +1,5 @@
+{
+	"main": "game",
+	"typings": "game.tsx",
+	"private": true
+}

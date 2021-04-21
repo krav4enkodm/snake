@@ -1,0 +1,5 @@
+{
+	"main": "setup",
+	"typings": "setup.tsx",
+	"private": true
+}

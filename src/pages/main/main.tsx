@@ -1,23 +1,31 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Field } from '../../components/field';
-import { Navigation } from '../../components/navigation';
-import { isItemInArray, createTarget, getStepInterval, ensureDefined, isOutOfRange } from '../../utils';
+import React, { useState, useRef, useMemo, useEffect } from 'react';
+
+import { Game } from '../game/game';
+import { Result } from '../result/result';
+import { Setup } from '../setup/setup';
+import { ensureDefined, isOutOfRange, isItemInArray } from '../../utils';
 import { Point } from '../../interfaces';
-import { useKeyboard } from '../../hooks';
+import { SizeList } from '../setup/constants';
 
 import s from './main.module.css';
 
-const size = 4;
-
-const defaultSnake: Point[] = [[0, 0]];
+enum GameState {
+	Init,
+	Start,
+	End
+}
 
 export function Main(): JSX.Element {
 	const timer = useRef<number | null>(null);
-	const [snake, setSnake] = useState<Point[]>(defaultSnake);
-	const [target, setTarget] = useState<Point>([1, 1]);
-	const [direction, setDirection] = useState<Point | null>(null);
+	const [size, setSize] = useState(SizeList.Medium);
+	const [state, setState] = useState(GameState.Init);
+	const [snake, setSnake] = useState<Point[]>([]);
 	const result = useMemo(
 		() => {
+			if (snake.length === 0) {
+				return undefined;
+			}
+
 			const snakeCopy = [...snake];
 			const head = snakeCopy.pop();
 			const [headX, headY] = ensureDefined(head);
@@ -44,72 +52,53 @@ export function Main(): JSX.Element {
 		},
 		[snake]
 	);
-	const step = useCallback(
-		(point: Point) => {
-			const [stepX, stepY] = point;
-			const [targetX, targetY] = target;
-			const [headX, headY] = snake[snake.length - 1];
-	
-			const nextSnake = [...snake];
-			const nextHeadX = headX + stepX;
-			const nextHeadY = headY + stepY;
-			const hasTarget = nextHeadX === targetX && nextHeadY === targetY;
-	
-			nextSnake.push([nextHeadX, nextHeadY]);
-	
-			if (hasTarget) {
-				setTarget(createTarget(nextSnake, size));
-			} else {
-				nextSnake.shift();
-			}
-	
-			setSnake(nextSnake);
-			setDirection(point);
-		},
-		[target, snake]
-	);
-
-	useKeyboard({ navigation: step });
 
 	useEffect(
 		() => {
-			setTarget(createTarget(defaultSnake, size));
-			return () => {
-				if (timer.current) {
-					clearInterval(timer.current);
-				}
+			if (result !== undefined) {
+				setState(GameState.End);
 			}
 		},
-		[]
-	);
-
-	useEffect(
-		() => {
-			if (direction === null) {
-				return;
-			}
-			if (timer.current) {
-				clearInterval(timer.current);
-			}
-	
-			timer.current = window.setInterval(
-				() => step(direction),
-				getStepInterval(snake.length, size * size)
-			);
-		},
-		[direction, snake, step]
+		[result]
 	);
 
 	return (
 		<div className={s.game}>
-			{result !== undefined ? (
-				<h1 className={s.result}>{result ? 'Win' : 'Game over'}</h1>
-			) : (
-				<>
-					<Field snake={snake} size={size} target={target} />
-					<Navigation step={step} />
-				</>
-			)}
+			{ render() }
 		</div>
 	);
+
+	function render(): React.ReactNode {
+		switch (state) {
+		case GameState.Init: {
+			return (
+				<Setup
+					onStart={ start }
+					size={ size }
+					setSize={ setSize }
+				/>
+			);
+		}
+		case GameState.Start: {
+			return (
+				<Game
+					timer={ timer }
+					size={ size }
+					snake={ snake }
+					setSnake={ setSnake }
+				/>
+			)
+		}
+		case GameState.End: {
+			return <Result result={ ensureDefined(result) } />
+		}
+		default: return null;
+		}
+	}
+
+	function start(): void {
+		const center = size / 2;
+		setSnake([[center, center]]);
+		setState(GameState.Start);
+	}
 }

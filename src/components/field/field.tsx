@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { isItemInArray } from '../../utils';
 import { Point } from '../../interfaces';
 

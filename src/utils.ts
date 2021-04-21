@@ -12,10 +12,6 @@ export function isItemInArray(array: Point[], [itemX, itemY]: Point): boolean {
 	return array.some(([x, y]) => x === itemX && y === itemY);
 }
 
-export function getRandom(size: number): number {
-	return Math.floor(Math.random() * (size - 1)) + 1;
-}
-
 export function isOutOfRange(coord: number, fieldSize: number): boolean {
 	return coord < 0 || coord >= fieldSize;
 }
