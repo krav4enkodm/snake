@@ -91,7 +91,6 @@
 			}
 		],
 		"react/jsx-key": "error",
-		"react-hooks/exhaustive-deps": "off",
 		"react/jsx-props-no-spreading": "off",
 		"react/button-has-type": "off",
 		"react/jsx-boolean-value": "off",
@@ -99,6 +98,7 @@
 		"react/no-unescaped-entities": "off",
 		"react/jsx-one-expression-per-line": "off",
 		"react/jsx-wrap-multilines": "off",
-		"react/destructuring-assignment": "off"
+		"react/destructuring-assignment": "off",
+		"react-hooks/exhaustive-deps": "off"
 	}
 }
