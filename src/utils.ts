@@ -24,11 +24,12 @@ export function createTarget(snake: Point[], size: number): Point {
 		xCoordCounter[x] += 1;
 		yCoordCounter[y] += 1;
 	});
-
-	const [minX] = sortCounter(xCoordCounter);
-	const [minY] = sortCounter(yCoordCounter);
-	const [minXCoord] = minX;
-	const [minYCoord] = minY;
+	const sortedX = sortCounter(xCoordCounter);
+	const sortedY = sortCounter(yCoordCounter);
+	const possibleX = sortedX.filter(([, value]) => value === sortedX[0][1]);
+	const possibleY = sortedY.filter(([, value]) => value === sortedY[0][1]);
+	const [minXCoord] = possibleX[getRandomIndex(possibleX.length)];
+	const [minYCoord] = possibleY[getRandomIndex(possibleY.length)];
 	const x = Number(minXCoord);
 	const y = Number(minYCoord);
 
@@ -57,9 +58,12 @@ function getValue(collection: Set<number>, length: number): number {
 	const availableValues = Array
 		.from({ length }, (_, i: number) => i)
 		.filter((i: number) => !collection.has(i));
-	const index = Math.floor(Math.random() * availableValues.length);
 
-	return availableValues[index];
+	return availableValues[getRandomIndex(availableValues.length)];
+}
+
+function getRandomIndex(length: number): number {
+	return Math.floor(Math.random() * length);
 }
 
 export function sortCounter(counter: Counter): [string, number][] {
@@ -75,9 +79,10 @@ export function sortCounter(counter: Counter): [string, number][] {
 type Counter = Record<string, number>;
 
 export function getCounter(length: number): Counter {
-	return Array.from({ length }, (_, i: number) => i)
+	return Array
+		.from({ length }, (_, i: number) => i)
 		.reduce(
-			(acc: Record<string, number>, next: number) => {
+			(acc: Counter, next: number) => {
 				acc[next] = 0;
 				return acc;
 			},
