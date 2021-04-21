@@ -16,6 +16,10 @@ export function getRandom(size: number): number {
 	return Math.floor(Math.random() * (size - 1)) + 1;
 }
 
+export function isOutOfRange(coord: number, fieldSize: number): boolean {
+	return coord < 0 || coord >= fieldSize;
+}
+
 export function createTarget(snake: Point[], size: number): Point {
 	const xCoordCounter = getCounter(size);
 	const yCoordCounter = getCounter(size);

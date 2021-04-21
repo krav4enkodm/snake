@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Field } from '../../components/field';
 import { Navigation } from '../../components/navigation';
-import { isItemInArray, createTarget, getStepInterval, ensureDefined } from '../../utils';
+import { isItemInArray, createTarget, getStepInterval, ensureDefined, isOutOfRange } from '../../utils';
 import { Point } from '../../interfaces';
 import { useKeyboard } from '../../hooks';
 
@@ -21,16 +21,19 @@ export function Main(): JSX.Element {
 			const snakeCopy = [...snake];
 			const head = snakeCopy.pop();
 			const [headX, headY] = ensureDefined(head);
+			const hasWon = snake.length === size * size;
 
 			if (
-				isOutOfRange(headX, size) ||
-				isOutOfRange(headY, size) ||
-				isItemInArray(snakeCopy, [headX, headY])
+				!hasWon && (
+					isOutOfRange(headX, size) ||
+					isOutOfRange(headY, size) ||
+					isItemInArray(snakeCopy, [headX, headY])
+				)
 			) {
 				return false;
 			}
 
-			if (snake.length === size * size) {
+			if (hasWon) {
 				if (timer.current) {
 					clearInterval(timer.current);
 				}
@@ -40,6 +43,30 @@ export function Main(): JSX.Element {
 			return undefined;
 		},
 		[snake]
+	);
+	const step = useCallback(
+		(point: Point) => {
+			const [stepX, stepY] = point;
+			const [targetX, targetY] = target;
+			const [headX, headY] = snake[snake.length - 1];
+	
+			const nextSnake = [...snake];
+			const nextHeadX = headX + stepX;
+			const nextHeadY = headY + stepY;
+			const hasTarget = nextHeadX === targetX && nextHeadY === targetY;
+	
+			nextSnake.push([nextHeadX, nextHeadY]);
+	
+			if (hasTarget) {
+				setTarget(createTarget(nextSnake, size));
+			} else {
+				nextSnake.shift();
+			}
+	
+			setSnake(nextSnake);
+			setDirection(point);
+		},
+		[target, snake]
 	);
 
 	useKeyboard({ navigation: step });
@@ -65,12 +92,12 @@ export function Main(): JSX.Element {
 				clearInterval(timer.current);
 			}
 	
-			// timer.current = window.setInterval(
-			// 	() => step(direction),
-			// 	getStepInterval(snake.length, size * size)
-			// );
+			timer.current = window.setInterval(
+				() => step(direction),
+				getStepInterval(snake.length, size * size)
+			);
 		},
-		[direction, snake]
+		[direction, snake, step]
 	);
 
 	return (
@@ -85,30 +112,4 @@ export function Main(): JSX.Element {
 			)}
 		</div>
 	);
-
-	function step(point: Point): void {
-		const [stepX, stepY] = point;
-		const [targetX, targetY] = target;
-		const [headX, headY] = snake[snake.length - 1];
-
-		const nextSnake = [...snake];
-		const nextHeadX = headX + stepX;
-		const nextHeadY = headY + stepY;
-		const hasTarget = nextHeadX === targetX && nextHeadY === targetY;
-
-		nextSnake.push([nextHeadX, nextHeadY]);
-
-		if (hasTarget) {
-			setTarget(createTarget(nextSnake, size));
-		} else {
-			nextSnake.shift();
-		}
-
-		setSnake(nextSnake);
-		setDirection(point);
-	}
-}
-
-function isOutOfRange(coord: number, fieldSize: number): boolean {
-	return coord < 0 || coord >= fieldSize;
 }
