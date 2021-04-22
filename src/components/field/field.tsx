@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 import { isItemInArray } from '../../utils';
 import { Point } from '../../interfaces';
@@ -24,17 +25,15 @@ export function Field(props: FieldProps): JSX.Element {
 		const cells = [];
 
 		for (let j = 0; j < size; j++) {
-			let className;
+			const isSnake = isItemInArray(snake, [j, i]);
+			const isTarget = x === j && y === i;
+			const className = classNames(
+				s.cell,
+				isSnake && s.snake,
+				isTarget && s.target
+			);
 
-			if (isItemInArray(snake, [j, i])) {
-				className = s.snake;
-			}
-
-			if (!className) {
-				className = x === j && y === i ? s.target : undefined;
-			}
-
-			cells.push(<td key={j} className={`${s.cell} ${className}`} />);
+			cells.push(<td key={j} className={ className } />);
 		}
 
 		rows.push(<tr key={i}>{cells}</tr>);

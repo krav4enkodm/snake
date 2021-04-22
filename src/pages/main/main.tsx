@@ -63,36 +63,36 @@ export function Main(): JSX.Element {
 	);
 
 	return (
-		<div className={s.game}>
-			{ render() }
+		<div className={s.app}>
+			{ render()}
 		</div>
 	);
 
 	function render(): React.ReactNode {
 		switch (state) {
-		case GameState.Init: {
-			return (
-				<Setup
-					onStart={ start }
-					size={ size }
-					setSize={ setSize }
-				/>
-			);
-		}
-		case GameState.Start: {
-			return (
-				<Game
-					timer={ timer }
-					size={ size }
-					snake={ snake }
-					setSnake={ setSnake }
-				/>
-			)
-		}
-		case GameState.End: {
-			return <Result result={ ensureDefined(result) } />
-		}
-		default: return null;
+			case GameState.Init: {
+				return (
+					<Setup
+						onStart={start}
+						size={size}
+						setSize={setSize}
+					/>
+				);
+			}
+			case GameState.Start: {
+				return (
+					<Game
+						timer={timer}
+						size={size}
+						snake={snake}
+						setSnake={setSnake}
+					/>
+				)
+			}
+			case GameState.End: {
+				return <Result result={ensureDefined(result)} />
+			}
+			default: return null;
 		}
 	}
 

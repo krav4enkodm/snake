@@ -15,22 +15,22 @@ export function useKeyboard(options: UseKeyboardOptions): void {
 			function handleKeydown(event: KeyboardEvent): void {
 
 				switch (event.keyCode) {
-				case KeyCodes.Left: {
-					navigation(offset[KeyCodes.Left]);
-					break;
-				}
-				case KeyCodes.Up: {
-					navigation(offset[KeyCodes.Up]);
-					break;
-				}
-				case KeyCodes.Right: {
-					navigation(offset[KeyCodes.Right]);
-					break;
-				}
-				case KeyCodes.Down: {
-					navigation(offset[KeyCodes.Down]);
-					break;
-				}
+					case KeyCodes.Left: {
+						navigation(offset[KeyCodes.Left]);
+						break;
+					}
+					case KeyCodes.Up: {
+						navigation(offset[KeyCodes.Up]);
+						break;
+					}
+					case KeyCodes.Right: {
+						navigation(offset[KeyCodes.Right]);
+						break;
+					}
+					case KeyCodes.Down: {
+						navigation(offset[KeyCodes.Down]);
+						break;
+					}
 				}
 			}
 

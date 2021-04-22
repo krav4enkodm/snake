@@ -1,4 +1,6 @@
-.game {
-	width: 100%;
-	min-height: 100vh;
+.app {
+	overflow: hidden;
+	height: 100vh;
+	color: var(--text-color-hex);
+	text-align: center;
 }

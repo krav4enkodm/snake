@@ -1,3 +1,9 @@
+:root {
+	--text-color-hex: #333333;
+	--text-color-rgb: 51, 51, 51;
+}
+
 body {
 	margin: 0;
+	font-family: sans-serif;
 }

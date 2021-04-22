@@ -45,12 +45,9 @@ export function Game(props: GameProps): JSX.Element {
 	useKeyboard({ navigation: step });
 
 	useEffect(
-		() => {
-			setTarget(createTarget(snake, size));
-			return () => {
-				if (timer.current) {
-					clearInterval(timer.current);
-				}
+		() => () => {
+			if (timer.current) {
+				clearInterval(timer.current);
 			}
 		},
 		[]
