@@ -1,0 +1,14 @@
+.button {
+	padding: 8px 16px;
+	font-size: 12px;
+	text-transform: uppercase;
+	border: none;
+	background-color: dodgerblue;
+	color: #fff;
+	border-radius: 4px;
+}
+
+.button:focus {
+	outline: 2px solid dodgerblue;
+	outline-offset: 2px;
+}

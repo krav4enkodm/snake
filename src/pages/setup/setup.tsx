@@ -2,6 +2,7 @@ import React, { CSSProperties, useMemo } from 'react';
 import classNames from 'classnames';
 
 import { SizeList } from './constants';
+import { Button } from '../../components/button/button';
 
 import s from './setup.module.css';
 
@@ -44,7 +45,7 @@ export function Setup(props: SetupProps): JSX.Element {
 				})}
 			</div>
 			<form className={ s.container } onSubmit={onStart}>
-				<div className={ s.size }>
+				<div className={ s.radiogroup }>
 					{sizeList.map((value: number) => {
 						const title = getTitle(value)
 						return (
@@ -65,7 +66,7 @@ export function Setup(props: SetupProps): JSX.Element {
 						)
 					})}
 				</div>
-				<button className={ s.submit }>Start</button>
+				<Button className={ s.submit }>Start</Button>
 			</form>	
 		</>
 	);
