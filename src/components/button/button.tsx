@@ -6,6 +6,7 @@ import s from './button.module.css';
 export interface ButtonProps {
 	className?: string;
 	children?: React.ReactNode;
+	onClick?: () => void;
 }
 
 export function Button(props: ButtonProps): JSX.Element {

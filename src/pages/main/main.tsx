@@ -90,10 +90,14 @@ export function Main(): JSX.Element {
 				)
 			}
 			case GameState.End: {
-				return <Result result={ensureDefined(result)} />
+				return <Result result={ensureDefined(result)} onEnd={ end } />
 			}
 			default: return null;
 		}
+	}
+
+	function end(): void {
+		setState(GameState.Init);
 	}
 
 	function start(): void {

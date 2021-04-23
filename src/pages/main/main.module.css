@@ -4,5 +4,5 @@
 	color: var(--text-color-hex);
 	text-align: center;
 	box-sizing: border-box;
-	padding-top: 10vh;
+	padding: 10vh 0;
 }

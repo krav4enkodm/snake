@@ -25,6 +25,8 @@ export function Field(props: FieldProps): JSX.Element {
 				const row = Math.floor(i / size);
 				const cell = i - row * size;
 				const isSnake = isItemInArray(snake, [cell, row]);
+				const [headX, headY] = snake[snake.length - 1];
+				const isSnakeHead = headX === cell && headY === row;
 				const isTarget = x === cell && y === row;;
 
 				return (
@@ -33,6 +35,7 @@ export function Field(props: FieldProps): JSX.Element {
 						className={ classNames(
 							s.cell,
 							isSnake && s.snake,
+							isSnakeHead && s.snake_head,
 							isTarget && s.target
 						) }
 					/>
