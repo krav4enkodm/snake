@@ -1,14 +1,14 @@
 .field {
-	border-collapse: collapse;
-	margin: auto;
+	--field-color: #8DBF39;
+
+	display: inline-grid;
+	grid-template-columns: repeat(var(--size), minmax(24px, 1fr));
+	grid-template-rows: repeat(var(--size), minmax(24px, 1fr));
+	gap: 1px;
 }
 
 .cell {
-	width: 24px;
-	height: 24px;
-	box-sizing: border-box;
-	border: 1px solid mediumseagreen;
-	background-color: lightgreen;
+	background-color: var(--field-color);
 }
 
 .snake:before,
@@ -18,7 +18,7 @@
 	width: 4px;
 	height: 4px;
 	border-radius: 50%;
-	background-color: sandybrown;
+	background-color: var(--secondary-color);
 }
 
 .snake:before {
@@ -33,9 +33,9 @@
 
 .snake {
 	position: relative;
-	background-color: firebrick;
+	background-color: var(--primary-color);
 }
 
 .target {
-	background-color: dodgerblue;
+	background-color: var(--primary-color);
 }

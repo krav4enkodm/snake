@@ -1,5 +1,5 @@
 .container {
-	margin-top: 16px;
+	margin-top: 32px;
 }
 
 .radiogroup {
@@ -12,11 +12,13 @@
 	position: fixed;
 	left: 0;
 	top: 0;
-	transform: translate(-100%, -100%);
+	width: 0;
+	height: 0;
+	margin: 0;
 }
 
 .radio:focus + .label {
-	outline: 2px solid dodgerblue;
+	outline: 2px solid var(--secondary-color);
 	outline-offset: 2px;
 }
 
@@ -44,14 +46,14 @@
 .cell {
 	width: 48px;
 	height: 48px;
-	background-color: dodgerblue;
+	background-color: var(--secondary-color);
 	border-radius: 4px;
 }
 
 .cell_selected {
-	background-color: firebrick;
+	background-color: var(--primary-color);
 }
 
 .submit {
-	margin-top: 16px;
+	margin-top: 32px;
 }

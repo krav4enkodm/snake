@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import classNames from 'classnames';
 
 import { isItemInArray } from '../../utils';
@@ -19,29 +19,24 @@ export function Field(props: FieldProps): JSX.Element {
 		target: [x, y],
 	} = props;
 
-	const rows = [];
-
-	for (let i = 0; i < size; i++) {
-		const cells = [];
-
-		for (let j = 0; j < size; j++) {
-			const isSnake = isItemInArray(snake, [j, i]);
-			const isTarget = x === j && y === i;
-			const className = classNames(
-				s.cell,
-				isSnake && s.snake,
-				isTarget && s.target
-			);
-
-			cells.push(<td key={j} className={ className } />);
-		}
-
-		rows.push(<tr key={i}>{cells}</tr>);
-	}
-
 	return (
-		<table className={s.field}>
-			<tbody>{rows}</tbody>
-		</table>
+		<div className={s.field} style={{ '--size': size } as CSSProperties}>
+			{ Array.from({ length: size * size }, (_: undefined, i: number) => {
+				const row = Math.floor(i / size);
+				const cell = i - row * size;
+				const isSnake = isItemInArray(snake, [cell, row]);
+				const isTarget = x === cell && y === row;;
+
+				return (
+					<div
+						className={ classNames(
+							s.cell,
+							isSnake && s.snake,
+							isTarget && s.target
+						) }
+					/>
+				);
+			}) }
+		</div>
 	);
 }
