@@ -1,10 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import classNames from 'classnames';
 
 import { Field } from '../../components/field';
 import { Navigation } from '../../components/navigation';
-import { createTarget, getStepInterval } from '../../utils';
+import { createTarget, getStepInterval, isItemInArray } from '../../utils';
 import { Point, Snake } from '../../interfaces';
 import { useKeyboard } from '../../hooks';
+
+import s from './game.module.css';
 
 export interface GameProps {
 	timer: React.MutableRefObject<number | null>;
@@ -72,8 +75,29 @@ export function Game(props: GameProps): JSX.Element {
 
 	return (
 		<>
-			<Field snake={snake} size={size} target={target} />
+			<Field
+				size={size}
+				className={ s.field }
+				getClassName={ getClassName }
+			/>
 			<Navigation />
 		</>
 	);
+
+	function getClassName(index: number): string {
+		const [x, y] = target;
+		const row = Math.floor(index / size);
+		const cell = index - row * size;
+		const isSnake = isItemInArray(snake, [cell, row]);
+		const [headX, headY] = snake[snake.length - 1];
+		const isSnakeHead = headX === cell && headY === row;
+		const isTarget = x === cell && y === row;;
+
+		return classNames(
+			s.cell,
+			isSnake && s.snake,
+			isSnakeHead && s.snake_head,
+			isTarget && s.target
+		);
+	}
 }

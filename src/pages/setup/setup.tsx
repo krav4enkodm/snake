@@ -1,10 +1,11 @@
-import React, { CSSProperties, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import classNames from 'classnames';
 
 import { SizeList } from './constants';
 import { Button } from '../../components/button/button';
 
 import s from './setup.module.css';
+import { Field } from '../../components/field/field';
 
 const sizeList = [
 	SizeList.ExtraSmall,
@@ -13,7 +14,6 @@ const sizeList = [
 	SizeList.Large,
 	SizeList.ExtraLarge
 ];
-const cellCount = sizeList.length * sizeList.length;
 
 export interface SetupProps {
 	size: number;
@@ -30,20 +30,11 @@ export function Setup(props: SetupProps): JSX.Element {
 
 	return (
 		<>
-			<div className={ s.table } style={{ '--size': sizeList.length } as CSSProperties}>
-				{Array.from({ length: cellCount }, (_, i) => {
-					const row = Math.floor(i / sizeList.length);
-					const cell = i - row * sizeList.length;
-					const isSelected =
-						cell <= selectedIndex &&
-						row <= selectedIndex;
-					const cellClassNames = classNames(
-						s.cell,
-						isSelected && s.cell_selected
-					);
-					return <div key={i} className={cellClassNames} />;
-				})}
-			</div>
+			<Field
+				size={ sizeList.length }
+				className={ s.table }
+				getClassName={ getClassName }
+			/>
 			<form className={ s.container } onSubmit={onStart}>
 				<div className={ s.radiogroup }>
 					{sizeList.map((value: number) => {
@@ -73,6 +64,13 @@ export function Setup(props: SetupProps): JSX.Element {
 
 	function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
 		setSize(Number(event.target.defaultValue));
+	}
+
+	function getClassName(index: number): string {
+		const row = Math.floor(index / sizeList.length);
+		const cell = index - row * sizeList.length;
+		const isSelected = cell <= selectedIndex && row <= selectedIndex;
+		return classNames(s.cell, isSelected && s.cell_selected);
 	}
 }
 
