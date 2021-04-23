@@ -5,3 +5,23 @@
 
 	margin-top: 24px;
 }
+
+.key {
+	width: 48px;
+	height: 48px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid rgba(var(--text-color-rgb), 0.5);
+	border-radius: 8px;
+	color: rgba(var(--text-color-rgb), 0.5);
+}
+
+.key + .key {
+	margin-left: 16px;
+}
+
+.key svg {
+	max-width: 50%;
+	max-height: 50%;
+}

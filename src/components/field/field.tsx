@@ -29,6 +29,7 @@ export function Field(props: FieldProps): JSX.Element {
 
 				return (
 					<div
+						key={ `${row}x${cell}` }
 						className={ classNames(
 							s.cell,
 							isSnake && s.snake,

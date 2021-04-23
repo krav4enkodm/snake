@@ -73,7 +73,7 @@ export function Game(props: GameProps): JSX.Element {
 	return (
 		<>
 			<Field snake={snake} size={size} target={target} />
-			<Navigation step={step} />
+			<Navigation />
 		</>
 	);
 }
