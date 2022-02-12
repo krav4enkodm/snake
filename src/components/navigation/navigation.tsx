@@ -1,27 +1,17 @@
 import React from 'react';
-
-import { ReactComponent as ArrowLeft } from '../../images/svg/arrow-left-solid.svg';
-import { ReactComponent as ArrowDown } from '../../images/svg/arrow-down-solid.svg';
-import { ReactComponent as ArrowUp } from '../../images/svg/arrow-up-solid.svg';
-import { ReactComponent as ArrowRight } from '../../images/svg/arrow-right-solid.svg';
+import classNames from 'classnames';
 
 import s from './navigation.module.css';
 
-export function Navigation(): JSX.Element {
+function NavigationFC(): JSX.Element {
 	return (
 		<div className={ s.navigation }>
-			<div className={ s.key }>
-				<ArrowLeft />
-			</div>
-			<div className={ s.key }>
-				<ArrowDown />
-			</div>
-			<div className={ s.key }>
-				<ArrowUp />
-			</div>
-			<div className={ s.key }>
-				<ArrowRight />
-			</div>
+			<div className={ classNames(s.key, s.left) } />
+			<div className={ classNames(s.key, s.down) } />
+			<div className={ classNames(s.key, s.up) } />
+			<div className={ classNames(s.key, s.right) } />
 		</div>
 	);
 }
+
+export const Navigation = React.memo(NavigationFC);

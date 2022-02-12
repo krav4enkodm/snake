@@ -1,14 +1,13 @@
-import { Point } from './interfaces';
+import { Point } from './types';
 
 export enum KeyCodes {
-	Space = 32,
 	Left = 37,
 	Up,
 	Right,
 	Down
 }
 
-export const offset: Record<string, Point> = {
+export const offset: Record<KeyCodes, Point> = {
 	[KeyCodes.Left]: [-1, 0],
 	[KeyCodes.Up]: [0, -1],
 	[KeyCodes.Right]: [1, 0],

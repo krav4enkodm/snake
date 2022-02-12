@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { KeyCodes, offset } from './constants';
-import { Point } from './interfaces';
+import { Point } from './types';
 
 export interface UseKeyboardOptions {
 	navigation: (direction: Point) => void;
@@ -11,6 +11,10 @@ export function useKeyboard(options: UseKeyboardOptions): void {
 	useEffect(
 		() => {
 			window.addEventListener('keydown', handleKeydown);
+
+			return () => {
+				window.removeEventListener('keydown', handleKeydown);
+			};
 
 			function handleKeydown(event: KeyboardEvent): void {
 
@@ -32,10 +36,6 @@ export function useKeyboard(options: UseKeyboardOptions): void {
 						break;
 					}
 				}
-			}
-
-			return () => {
-				window.removeEventListener('keydown', handleKeydown);
 			}
 		},
 		[navigation]

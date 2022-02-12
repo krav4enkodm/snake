@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import classNames from 'classnames';
 
-import { Field } from '../../components/field';
-import { Navigation } from '../../components/navigation';
-import { createTarget, getStepInterval, isItemInArray } from '../../utils';
-import { Point, Snake } from '../../interfaces';
+import { isItemInArray } from '../../utils/is-item-in-array';
+import { getStepInterval } from '../../utils/get-step-interval';
+import { createTarget } from '../../utils/create-target';
+import { Field } from '../../components/field/field';
+import { Navigation } from '../../components/navigation/navigation';
+import { Point, Snake } from '../../types';
 import { useKeyboard } from '../../hooks';
 
 import s from './game.module.css';

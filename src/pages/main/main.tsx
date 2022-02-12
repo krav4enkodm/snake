@@ -1,10 +1,11 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react';
 
+import { isOutOfRange } from '../../utils/is-out-of-range';
+import { isItemInArray } from '../../utils/is-item-in-array';
 import { Game } from '../game/game';
 import { Result } from '../result/result';
 import { Setup } from '../setup/setup';
-import { ensureDefined, isOutOfRange, isItemInArray } from '../../utils';
-import { Point } from '../../interfaces';
+import { Point } from '../../types';
 import { SizeList } from '../setup/constants';
 
 import s from './main.module.css';
@@ -28,7 +29,7 @@ export function Main(): JSX.Element {
 
 			const snakeCopy = [...snake];
 			const head = snakeCopy.pop();
-			const [headX, headY] = ensureDefined(head);
+			const [headX, headY] = head!;
 			const hasWon = snake.length === size * size;
 
 			if (
@@ -64,37 +65,26 @@ export function Main(): JSX.Element {
 
 	return (
 		<div className={s.app}>
-			{ render()}
+			{ state === GameState.Init && (
+				<Setup
+					onStart={start}
+					size={size}
+					setSize={setSize}
+				/>
+			) }
+			{ state === GameState.Start && (
+				<Game
+					timer={timer}
+					size={size}
+					snake={snake}
+					setSnake={setSnake}
+				/>
+			) }
+			{ state === GameState.End && (
+				<Result result={result!} onEnd={end} />
+			) }
 		</div>
 	);
-
-	function render(): React.ReactNode {
-		switch (state) {
-			case GameState.Init: {
-				return (
-					<Setup
-						onStart={start}
-						size={size}
-						setSize={setSize}
-					/>
-				);
-			}
-			case GameState.Start: {
-				return (
-					<Game
-						timer={timer}
-						size={size}
-						snake={snake}
-						setSnake={setSnake}
-					/>
-				)
-			}
-			case GameState.End: {
-				return <Result result={ensureDefined(result)} onEnd={ end } />
-			}
-			default: return null;
-		}
-	}
 
 	function end(): void {
 		setState(GameState.Init);

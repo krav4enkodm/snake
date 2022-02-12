@@ -1,20 +1,6 @@
-import { Point } from './interfaces';
-
-export function ensureDefined<T>(value: T | undefined): T {
-	if (value === undefined) {
-		throw new Error('Value is undefined');
-	}
-
-	return value;
-}
-
-export function isItemInArray(array: Point[], [itemX, itemY]: Point): boolean {
-	return array.some(([x, y]) => x === itemX && y === itemY);
-}
-
-export function isOutOfRange(coord: number, fieldSize: number): boolean {
-	return coord < 0 || coord >= fieldSize;
-}
+import { Point } from 'types';
+import { getCounter } from './get-counter';
+import { sortCounter } from './sort-counter';
 
 export function createTarget(snake: Point[], size: number): Point {
 	const xCoordCounter = getCounter(size);
@@ -64,38 +50,4 @@ function getValue(collection: Set<number>, length: number): number {
 
 function getRandomIndex(length: number): number {
 	return Math.floor(Math.random() * length);
-}
-
-export function sortCounter(counter: Counter): [string, number][] {
-	return Object.entries(counter).sort(
-		(counterA: [string, number], counterB: [string, number]) => {
-			const [, valueA] = counterA;
-			const [, valueB] = counterB;
-			return valueA - valueB;
-		}
-	);
-}
-
-type Counter = Record<string, number>;
-
-export function getCounter(length: number): Counter {
-	return Array
-		.from({ length }, (_, i: number) => i)
-		.reduce(
-			(acc: Counter, next: number) => {
-				acc[next] = 0;
-				return acc;
-			},
-			{}
-		);
-}
-
-export function getStepInterval(length: number, cellsCount: number): number {
-	const interval = 1000 - (length / cellsCount) * 1000;
-
-	if (interval < 500) {
-		return 500;
-	}
-
-	return interval;
 }
