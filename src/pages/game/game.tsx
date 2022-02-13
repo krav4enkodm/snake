@@ -1,15 +1,15 @@
-import React, { useCallback, useEffect, useState } from 'react';
 import classNames from 'classnames';
-
-import { isItemInArray } from '../../utils/is-item-in-array';
-import { getStepInterval } from '../../utils/get-step-interval';
-import { createTarget } from '../../utils/create-target';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Field } from '../../components/field/field';
 import { Navigation } from '../../components/navigation/navigation';
-import { Point, Snake } from '../../types';
 import { useKeyboard } from '../../hooks';
-
+import { Point, Snake } from '../../types';
+import { createTarget } from '../../utils/create-target';
+import { getStepInterval } from '../../utils/get-step-interval';
+import { isItemInArray } from '../../utils/is-item-in-array';
 import s from './game.module.css';
+
+
 
 export interface GameProps {
 	timer: React.MutableRefObject<number | null>;
@@ -98,7 +98,7 @@ export function Game(props: GameProps): JSX.Element {
 		return classNames(
 			s.cell,
 			isSnake && s.snake,
-			isSnakeHead && s.snake_head,
+			isSnakeHead && s['snake-head'],
 			isTarget && s.target
 		);
 	}

@@ -1,43 +1,42 @@
 .navigation {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin-top: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 24px;
 }
 
 .key {
-  width: 48px;
-  height: 48px;
-  border: 2px solid var(--secondary-color);
-  border-radius: 8px;
-  color: var(--secondary-color);
-  background-size: 50%;
-  background-repeat: no-repeat;
-  background-position: center;
+	width: 48px;
+	height: 48px;
+	border: 2px solid var(--secondary-color);
+	border-radius: 8px;
+	color: var(--secondary-color);
+	background-size: 50%;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
 .key + .key {
-  margin-left: 16px;
+	margin-left: 16px;
 }
 
 .key svg {
-  max-width: 50%;
-  max-height: 50%;
+	max-width: 50%;
+	max-height: 50%;
 }
 
 .up {
-  background-image: url("../../images/arrow-up-solid.svg");
+	background-image: url("../../images/arrow-up-solid.svg");
 }
 
 .down {
-  background-image: url("../../images/arrow-down-solid.svg");
+	background-image: url("../../images/arrow-down-solid.svg");
 }
 
 .left {
-  background-image: url("../../images/arrow-left-solid.svg");
+	background-image: url("../../images/arrow-left-solid.svg");
 }
 
 .right {
-  background-image: url("../../images/arrow-right-solid.svg");
+	background-image: url("../../images/arrow-right-solid.svg");
 }

@@ -70,7 +70,7 @@ export function Setup(props: SetupProps): JSX.Element {
 		const row = Math.floor(index / sizeList.length);
 		const cell = index - row * sizeList.length;
 		const isSelected = cell <= selectedIndex && row <= selectedIndex;
-		return classNames(s.cell, isSelected && s.cell_selected);
+		return classNames(s.cell, isSelected && s['cell-selected']);
 	}
 }
 

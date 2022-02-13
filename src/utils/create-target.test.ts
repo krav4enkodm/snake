@@ -1,7 +1,7 @@
 import { Snake } from '../types';
 import { createTarget } from './create-target';
 
-describe('create target', () => {
+describe('createTarget', () => {
 
 	it('should create target in last cell on small field', () => {
 		const snake: Snake = [
