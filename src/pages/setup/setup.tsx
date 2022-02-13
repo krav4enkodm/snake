@@ -31,33 +31,33 @@ export function Setup(props: SetupProps): JSX.Element {
 	return (
 		<>
 			<Field
-				size={ sizeList.length }
-				className={ s.table }
-				getClassName={ getClassName }
+				size={sizeList.length}
+				className={s.table}
+				getClassName={getClassName}
 			/>
-			<form className={ s.container } onSubmit={onStart}>
-				<div className={ s.radiogroup }>
+			<form className={s.container} onSubmit={onStart}>
+				<div className={s.radiogroup}>
 					{sizeList.map((value: number) => {
 						const title = getTitle(value)
 						return (
 							<React.Fragment key={title}>
 								<input
 									id={title}
-									className={ s.radio }
+									className={s.radio}
 									type='radio'
 									name='size'
 									value={value}
 									onChange={handleChange}
 									checked={size === value}
 								/>
-								<label className={ s.label } htmlFor={title}>
+								<label className={s.label} htmlFor={title}>
 									{getTitle(value)} {`(${value}x${value})`}
 								</label>
 							</React.Fragment>
 						)
 					})}
 				</div>
-				<Button className={ s.submit }>Start</Button>
+				<Button className={s.submit}>Start</Button>
 			</form>	
 		</>
 	);
@@ -76,17 +76,17 @@ export function Setup(props: SetupProps): JSX.Element {
 
 function getTitle(value: SizeList): string {
 	switch (value) {
-		case SizeList.ExtraSmall:
-			return 'xs';
-		case SizeList.Small:
-			return 's';
-		case SizeList.Medium:
-			return 'm';
-		case SizeList.Large:
-			return 'l';
-		case SizeList.ExtraLarge:
-			return 'xl';
-		default:
-			return '';
+	case SizeList.ExtraSmall:
+		return 'xs';
+	case SizeList.Small:
+		return 's';
+	case SizeList.Medium:
+		return 'm';
+	case SizeList.Large:
+		return 'l';
+	case SizeList.ExtraLarge:
+		return 'xl';
+	default:
+		return '';
 	}
 }

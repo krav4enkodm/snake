@@ -11,9 +11,9 @@ export interface ResultProps {
 export function Result(props: ResultProps): JSX.Element {
 	const { result, onEnd } = props;
 	return (
-		<div className={ s.container }>
-			<h1 className={ s.result }>{ result ? 'Congratulations!' : 'Game over' }</h1>
-			<Button onClick={ onEnd }>Home</Button>
+		<div className={s.container}>
+			<h1 className={s.result}>{ result ? 'Congratulations!' : 'Game over' }</h1>
+			<Button onClick={onEnd}>Home</Button>
 		</div>
 	);
 }

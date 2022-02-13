@@ -2,7 +2,7 @@ import { getCounter } from './get-counter';
 
 describe('getCounter', () => {
 
-    it('should create counter based on length', () => {
+	it('should create counter based on length', () => {
 		const counter0 = getCounter(0);
 		const counter1 = getCounter(1);
 		const counter2 = getCounter(2);

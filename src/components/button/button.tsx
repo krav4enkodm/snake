@@ -12,7 +12,7 @@ export interface ButtonProps {
 export function Button(props: ButtonProps): JSX.Element {
 	const { children, className, ...rest } = props;
 	return (
-		<button className={ classNames(s.button, className) } { ...rest }>
+		<button className={classNames(s.button, className)} {...rest}>
 			{ children }
 		</button>
 	);

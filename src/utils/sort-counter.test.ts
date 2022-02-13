@@ -3,7 +3,7 @@ import { getCounter } from './get-counter';
 import { sortCounter } from './sort-counter';
 
 describe('sortCounter', () => {
-    it('should sort counter in ascending order', () => {
+	it('should sort counter in ascending order', () => {
 		const snake: Snake = [
 			[1, 1],
 			[1, 0],

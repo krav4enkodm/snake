@@ -79,8 +79,8 @@ export function Game(props: GameProps): JSX.Element {
 		<>
 			<Field
 				size={size}
-				className={ s.field }
-				getClassName={ getClassName }
+				className={s.field}
+				getClassName={getClassName}
 			/>
 			<Navigation />
 		</>
@@ -93,7 +93,7 @@ export function Game(props: GameProps): JSX.Element {
 		const isSnake = isItemInArray(snake, [cell, row]);
 		const [headX, headY] = snake[snake.length - 1];
 		const isSnakeHead = headX === cell && headY === row;
-		const isTarget = x === cell && y === row;;
+		const isTarget = x === cell && y === row;
 
 		return classNames(
 			s.cell,

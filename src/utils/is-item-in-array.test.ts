@@ -5,7 +5,7 @@ import { isItemInArray } from './is-item-in-array';
 
 describe('isItemInArray', () => {
 
-    it('should not create target under snake', () => {
+	it('should not create target under snake', () => {
 		const snake: Snake = [
 			[0, 3],
 			[1, 3],

@@ -10,9 +10,9 @@ export function Field(props: FieldProps): JSX.Element {
 	const { size, getClassName, className } = props;
 
 	return (
-		<div className={ className } style={{ '--size': size }}>
+		<div className={className} style={{ '--size': size }}>
 			{ Array.from({ length: size * size }, (_, index) => (
-				<div key={ index } className={ getClassName(index) } />
+				<div key={index} className={getClassName(index)} />
 			)) }
 		</div>
 	);
